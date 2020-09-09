@@ -1,0 +1,64 @@
+<app-header></app-header>
+<section>
+    <br>
+    <h4 style="text-align: center;" id="mytitle">Sistema de Empleados</h4>
+
+    <div class="container">
+        <h5>Crear Empleado</h5>
+        <form action="">
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="employe.name" (focus)="deleteMessage()">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" [(ngModel)]="employe.email" (focus)="deleteMessage()">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" style="display:flex;align-items: center;justify-content: center;" (click)="createEmploye()" *ngIf="modify == false" id="addButton">
+                Crear
+                <i class="material-icons">add</i>
+            </button>
+            <div >
+                <button type="button" class="btn btn-primary btn-block" style="display:flex;align-items: center;justify-content: center;" (click)="updateEmploye()" *ngIf="modify == true" id="modifyButton">
+                    Modificar
+                    <i class="material-icons">edit</i>
+                </button>
+                <button type="button" class="btn btn-danger btn-block" style="display:flex;align-items: center;justify-content: center;" (click)="cancelUpdate()" *ngIf="modify == true">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+        <br>
+        <div class="alert alert-success" role="alert" *ngIf="message != ''" id="message">
+            {{message}}
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of employes">
+                    <td>{{e.name}}</td>
+                    <td>{{e.email}}</td>
+                    <td>
+                        <button class="btn btn-link" (click)="setEmployeForUpdate(e)">
+                            <i class="material-icons" style="color:black">edit</i>
+                        </button>
+                        <button class="btn btn-link" (click)="deleteEmploye(e)">
+                            <i class="material-icons" style="color:red">delete</i>
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</section>
