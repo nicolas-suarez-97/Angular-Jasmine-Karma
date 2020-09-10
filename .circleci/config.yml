@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:latest-browsers
     steps:
@@ -12,4 +12,22 @@ jobs:
           name: Run Tests
           command: npm test
 
-          
+workflow:
+  - test
+    - aws-s3/sync:
+        arguments: |
+          --acl public-read \
+          --cache-control "max-age=86400"
+        aws-access-key-id: AWS_ACCESS_KEY_ID_BLUE
+        aws-region: AWS_REGION_BLUE
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY_BLUE
+        from: bucket
+        overwrite: true
+        to: 's3://my-s3-bucket-name/prefix'
+    - aws-s3/copy:
+        arguments: '--dryrun'
+        from: bucket/build_asset.txt
+        to: 's3://my-s3-bucket-name'
+      
+
+            

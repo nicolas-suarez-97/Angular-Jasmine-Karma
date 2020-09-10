@@ -23,7 +23,7 @@ export class EmployeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getEmployes();
+    this.getEmployes();
   }
 
   getEmployes(){
