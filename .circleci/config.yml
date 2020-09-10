@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
-
+          
       - aws-s3/sync:
           arguments: |
             --acl public-read \
@@ -26,9 +26,15 @@ jobs:
           from: bucket
           overwrite: true
           to: 's3://angular-cloudfront-test/prefix'
-          
+
       - aws-s3/copy:
           arguments: '--dryrun'
           from: bucket/build_asset.txt
           to: 's3://angular-cloudfront-test'
-       
+
+
+workflow:
+  build-deploy:
+    jobs:
+      - build
+               
