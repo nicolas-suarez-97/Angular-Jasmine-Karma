@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { RequestsService } from 'src/app/request/requests.service';
 import { Employe } from 'src/app/models/employe';
-import {of} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 
 describe('EmployeComponent', () => {
@@ -17,8 +17,7 @@ describe('EmployeComponent', () => {
   let fixture: ComponentFixture<EmployeComponent>;
   let employes: Employe[];
   let employeService: EmployeService;
-  let e: Employe;
-  
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -35,7 +34,6 @@ describe('EmployeComponent', () => {
     // fixture.detectChanges();
     employeService = TestBed.get(EmployeService);
     employes = [];
-    e = new Employe( undefined,undefined,undefined);
 
   });
 
@@ -48,59 +46,57 @@ describe('EmployeComponent', () => {
     expect(document.getElementById('mytitle').innerHTML).toBe('Sistema de Empleados');
   });
 
-  it('Get Employes',  async () => {
+  it('Get Employes', () => {
+    const employes: Employe[] = [
+      { "id": "N9SQbnQBi70rwxUHY9sq", "name": "Juan ", "email": "j@gmail.com" }, 
+      { "id": "ttQmc3QBi70rwxUHaN7I", "name": "test", "email": "t@mail.com" }, 
+      { "id": "wNREbnQBi70rwxUHgdog", "name": "Nicolas", "email": "nicolas@gmail.co" }
+    ];
+    fixture.detectChanges();
+    spyOn(component.employeService, 'findAll').and.returnValue(of(employes));
     component.getEmployes();
     fixture.detectChanges();
-    spyOn(component,'getEmployes');
-
-    fixture.whenStable().then(()=>{
-      fixture.detectChanges();
-      // expect(component.employes.length).toBeGreaterThan(0);
-    });
+    expect(component.employes).toEqual(employes);
+    expect(component.employes.length).toBeGreaterThan(0);
   });
 
-  it('Create Employe', async () => {
-    component.employe.name = 'Test';
+  it('Create Employe',  () => {
+    component.employe.name = 'test';
     component.employe.email = 't@mail.com';
+    
+    spyOn(component.employeService, 'create').and.returnValue(of(component.employe));
     component.createEmploye();
     fixture.detectChanges();
-    spyOn(component,'createEmploye');
-
-    fixture.whenStable().then(()=>{
-      fixture.detectChanges();
-      // expect(component.message).toBe('Creado Correctamente');
-    });
+    expect(component.message).toBe('Creado Correctamente');
+   
   });
-  
-  
-  it('Update Employe', ()=>{
+
+
+  it('Update Employe', () => {
     component.employe.name = 'Test';
     component.employe.email = 't@mail.com';
     component.employe.id = 'wNREbnQBi70rwxUHgdog';
+    spyOn(component.employeService, 'update').and.returnValue(of(component.employe));
     component.updateEmploye();
-    
-    fixture.detectChanges();
-    spyOn(component,'updateEmploye');
 
-    fixture.whenStable().then(()=>{
-      fixture.detectChanges();
-      // expect(component.message).toBe('Actualizado Correctamente');
-    });
+    fixture.detectChanges();
+    expect(component.message).toBe('Actualizado Correctamente');
+   
   });
 
-  it('Delete Employe', ()=>{
+  it('Delete Employe', async () => {
     component.employe.name = 'Test';
     component.employe.email = 't@mail.com';
     component.employe.id = 'wNREbnQBi70rwxUHgdog';
-    component.deleteEmploye(component.employe);
+    spyOn(component.employeService, 'delete').and.returnValue(of(component.employe));
     
-    fixture.detectChanges();
-    spyOn(component,'deleteEmploye');
-
     fixture.whenStable().then(()=>{
       fixture.detectChanges();
-      // expect(component.message).toBe('Eliminado Correctamente');
+      component.deleteEmploye(component.employe);
+      expect(component.message).toBe('Eliminado Correctamente');
+
     });
+
   });
 
   it('Toggle Options', () => {
@@ -120,8 +116,5 @@ describe('EmployeComponent', () => {
     expect(component.message).toBe('');
   });
 
-  it('Update Error', ()=>{
-    component.updateEmploye();
-  });
 
 });

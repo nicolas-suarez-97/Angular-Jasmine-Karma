@@ -16,8 +16,9 @@ export class EmployeComponent implements OnInit {
   );
   modify = false;
   message: string = "";
+  response: any;
   constructor(
-    private employeService: EmployeService
+    public employeService: EmployeService
   ) {
     this.getEmployes();
   }
@@ -30,10 +31,8 @@ export class EmployeComponent implements OnInit {
     this.employeService.findAll()
       .subscribe(res => {
         this.employes = res;
-      }),
-      error => {
-        console.log(error)
-      }
+        this.response = res;
+      });
   }
 
   createEmploye(){
@@ -45,11 +44,9 @@ export class EmployeComponent implements OnInit {
           undefined,
           undefined
         );
-        this.message = "Creado Correctamente"
-      }),
-      error => {
-        console.log(error)
-      }
+        this.message = "Creado Correctamente";
+        this.response = res;
+      });
   }
 
   deleteMessage(){
@@ -82,30 +79,22 @@ export class EmployeComponent implements OnInit {
           undefined,
           undefined
         );
-        this.employeService.findAll()
-        .subscribe(res => {
-          this.employes = res;
-          // this.message = "Actualizado Correctamente"
-          this.modify = false;  
-          alert('Actualizado Correctamente');
-        });
        
-      }),
-      error => {
-        console.log(error);
-      }
+        this.message = "Actualizado Correctamente"
+        this.modify = false;  
+        alert('Actualizado Correctamente');
+        this.response = res;
+       
+      });
   }
 
   deleteEmploye(employe: Employe){
     this.employeService.delete(employe)
       .subscribe(res => {
-        this.employeService.findAll()
-        .subscribe(res => {
-          this.employes = res;
-          // this.message = "Eliminado Correctamente"
-          alert('Actualizado Correctamente');  
-        });
         
+        this.message = "Eliminado Correctamente"
+        alert('Actualizado Correctamente');  
+        this.response = res;
       });
   }
 
