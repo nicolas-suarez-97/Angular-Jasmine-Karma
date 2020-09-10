@@ -10,5 +10,5 @@ jobs:
           command: npm install
       - run:
           name: Run Tests
-          command: npm test
+          command: ng test
 
