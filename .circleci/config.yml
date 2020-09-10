@@ -8,6 +8,9 @@ jobs:
       - run: 
           name: Install
           command: npm install
+      -run:
+          name: Angular Cli
+          command: npm install -g @angular/cli
       - run:
           name: Run Tests
           command: ng test
