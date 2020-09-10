@@ -4,7 +4,7 @@ version: 2.1
 #   aws-s3: circleci/aws-s3@x.y
 
 jobs:
-  run-task:
+  build:
     docker:
       - image: circleci/node:latest-browsers
     steps:
