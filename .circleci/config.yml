@@ -12,7 +12,6 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: Angular
-          aws-region: us-east-1
       - run: 
           name: Install
           command: npm install
@@ -46,11 +45,7 @@ workflows:
 #           to: 's3://angular-cloudfront-test'
 
 
-# workflow:
+# workflows:
 #   build-deploy:
 #     jobs:
-#       - build
-
-# aws deploy create-application --application-name Angular-Jasmine
-# aws deploy push --application-name Angular-JK --s3-location s3://angular-cloudfront-test/Angular-Jasmine.zip --ignore-hidden-files
-               
+#       - build 
