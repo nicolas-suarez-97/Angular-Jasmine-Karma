@@ -12,10 +12,10 @@ jobs:
                 name: Run Tests
                 command: npm test
 
-# workflow:
-#     build:
-#         jobs:
-#             - run-task
+workflow:
+    build:
+        jobs:
+            - run-task
 #             - aws-s3/sync:
 #                 arguments: |
 #                   --acl public-read \
