@@ -10,4 +10,4 @@ jobs:
           command: npm install
       - run:
           name: Run Tests
-          command: ng test
+          command: npm test
