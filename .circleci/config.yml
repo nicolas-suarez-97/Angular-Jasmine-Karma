@@ -10,11 +10,11 @@ jobs:
     steps:
       - checkout
       - run: 
-        name: Install
-        command: npm install
+          name: Install
+          command: npm install
       - run:
-        name: Run Tests
-        command: npm test
+          name: Run Tests
+          command: npm test
 
 # workflow:
 #   build:
