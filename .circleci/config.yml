@@ -12,23 +12,23 @@ jobs:
                 name: Run Tests
                 command: npm test
 
-workflow:
-    build:
-        jobs:
-            - run-task
-            - aws-s3/sync:
-                arguments: |
-                  --acl public-read \
-                  --cache-control "max-age=86400"
-                aws-access-key-id: ${AWS_ACCESS_KEY_ID}
-                aws-region: ${AWS_REGION}
-                aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
-                from: bucket
-                overwrite: true
-                to: 's3://angular-cloudfront-test/prefix'
-            - aws-s3/copy:
-                arguments: '--dryrun'
-                from: bucket/build_asset.txt
-                to: 's3://angular-cloudfront-test'
+# workflow:
+#     build:
+#         jobs:
+#             - run-task
+#             - aws-s3/sync:
+#                 arguments: |
+#                   --acl public-read \
+#                   --cache-control "max-age=86400"
+#                 aws-access-key-id: ${AWS_ACCESS_KEY_ID}
+#                 aws-region: ${AWS_REGION}
+#                 aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+#                 from: bucket
+#                 overwrite: true
+#                 to: 's3://angular-cloudfront-test/prefix'
+#             - aws-s3/copy:
+#                 arguments: '--dryrun'
+#                 from: bucket/build_asset.txt
+#                 to: 's3://angular-cloudfront-test'
 
             
