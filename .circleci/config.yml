@@ -23,10 +23,10 @@ jobs:
           command: npm run aws-deploy
 
 
-workflows:
-  aws-cli:
-    jobs:
-      - build
+# workflows:
+#   aws-cli:
+#     jobs:
+#       - build
 
 #       - aws-s3/sync:
 #           arguments: |
