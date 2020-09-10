@@ -49,43 +49,36 @@ describe('EmployeComponent', () => {
   });
 
   it('Get Employes',  async () => {
-    spyOn(component,'getEmployes');
-    component.getEmployes();
     fixture.detectChanges();
-    expect(component.getEmployes).toHaveBeenCalledWith();
+    // spyOn(component,'getEmployes').and.returnValue(true);
+
+    fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      // expect(component.getEmployes).toBe(true);
+    });
     
-    tick(1);
-    // expect(component.employes).toEqual([employes]);
   });
 
-  // it('Create Employe', async () => {
-  //   component.employe.name = 'Test';
-  //   component.employe.email = 't@mail.com';
-  //   component.createEmploye();
-  //   expect(component.message).toBe('');
+  it('Create Employe', async () => {
+    component.employe.name = 'Test';
+    component.employe.email = 't@mail.com';
+    component.createEmploye();
+  });
+  
+  
+  it('Update Employe', ()=>{
+    component.employe.name = 'Test';
+    component.employe.email = 't@mail.com';
+    component.employe.id = 'wNREbnQBi70rwxUHgdog';
+    component.updateEmploye();
+  });
 
-  // });
-
-  // it('should have <p> with "banner works!"', () => {
-  //   const bannerElement: HTMLElement = fixture.nativeElement;
-  //   const p = bannerElement.querySelector('#name');
-  //   p.textContent = 'Test';
-  //   expect(p.textContent).toEqual('Test');
-  // });
-
-  // it('Update Employe', ()=>{
-  //   component.employe.name = 'Test';
-  //   component.employe.email = 't@mail.com';
-  //   component.employe.id = 'wNREbnQBi70rwxUHgdog';
-  //   component.updateEmploye();
-  // });
-
-  // it('Delete Employe', ()=>{
-  //   component.employe.name = 'Test';
-  //   component.employe.email = 't@mail.com';
-  //   component.employe.id = 'wNREbnQBi70rwxUHgdog';
-  //   component.deleteEmploye(component.employe);
-  // });
+  it('Delete Employe', ()=>{
+    component.employe.name = 'Test';
+    component.employe.email = 't@mail.com';
+    component.employe.id = 'wNREbnQBi70rwxUHgdog';
+    component.deleteEmploye(component.employe);
+  });
 
   it('Toggle Options', () => {
     component.employe.name = 'Test';
@@ -102,6 +95,10 @@ describe('EmployeComponent', () => {
     component.message = 'Creado Correctamente';
     component.deleteMessage();
     expect(component.message).toBe('');
+  });
+
+  it('Update Error', ()=>{
+    component.updateEmploye();
   });
 
 });
