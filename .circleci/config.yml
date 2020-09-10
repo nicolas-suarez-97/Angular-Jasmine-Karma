@@ -1,5 +1,7 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@1.3
   
 jobs:
   build:
@@ -16,9 +18,7 @@ jobs:
       - run:
           name: Deploy
           command: npm run aws-deploy
-          
-orbs:
-  aws-cli: circleci/aws-cli@1.3
+
 
 workflows:
   aws-cli:
