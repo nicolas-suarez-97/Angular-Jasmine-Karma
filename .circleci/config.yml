@@ -4,7 +4,7 @@ orbs:
   aws-s3: circleci/aws-s3@1.0.16
 
 jobs:
-  build:
+  run-task:
     docker:
       - image: circleci/node:latest-browsers
     steps:
@@ -17,9 +17,9 @@ jobs:
           command: npm test
 
 workflow:
-  build.deploy:
+  build-deploy:
     jobs:
-      - build
+      - run-task
       - aws-s3/sync:
           arguments: |
             --acl public-read \
