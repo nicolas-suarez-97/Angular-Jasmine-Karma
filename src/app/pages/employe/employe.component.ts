@@ -26,38 +26,26 @@ export class EmployeComponent implements OnInit {
     this.getEmployes();
   }
 
-  getEmployes(){
-    let result = '';
+  async getEmployes(){
     this.employeService.findAll()
       .subscribe(res => {
         this.employes = res;
-        result='ok';
       }),
       error => {
         console.log(error)
       }
-    console.log(result);
   }
 
   createEmploye(){
     console.log(this.employe);
     this.employeService.create(this.employe)
       .subscribe( res => {
-        console.log(res);
-        
         this.employe = new Employe(
           undefined,
           undefined,
           undefined
         );
         this.message = "Creado Correctamente"
-        this.employeService.findAll()
-        .subscribe(res => {
-          this.employes = res;
-          this.modify = false;
-          alert('Creado Correctamente');
-        });
-
       }),
       error => {
         console.log(error)

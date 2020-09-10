@@ -49,20 +49,27 @@ describe('EmployeComponent', () => {
   });
 
   it('Get Employes',  async () => {
+    component.getEmployes();
     fixture.detectChanges();
-    // spyOn(component,'getEmployes').and.returnValue(true);
+    spyOn(component,'getEmployes');
 
     fixture.whenStable().then(()=>{
       fixture.detectChanges();
-      // expect(component.getEmployes).toBe(true);
+      // expect(component.employes.length).toBeGreaterThan(0);
     });
-    
   });
 
   it('Create Employe', async () => {
     component.employe.name = 'Test';
     component.employe.email = 't@mail.com';
     component.createEmploye();
+    fixture.detectChanges();
+    spyOn(component,'createEmploye');
+
+    fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      // expect(component.message).toBe('Creado Correctamente');
+    });
   });
   
   
@@ -71,6 +78,14 @@ describe('EmployeComponent', () => {
     component.employe.email = 't@mail.com';
     component.employe.id = 'wNREbnQBi70rwxUHgdog';
     component.updateEmploye();
+    
+    fixture.detectChanges();
+    spyOn(component,'updateEmploye');
+
+    fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      expect(component.message).toBe('Actualizado Correctamente');
+    });
   });
 
   it('Delete Employe', ()=>{
@@ -78,6 +93,14 @@ describe('EmployeComponent', () => {
     component.employe.email = 't@mail.com';
     component.employe.id = 'wNREbnQBi70rwxUHgdog';
     component.deleteEmploye(component.employe);
+    
+    fixture.detectChanges();
+    spyOn(component,'deleteEmploye');
+
+    fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      expect(component.message).toBe('Eliminado Correctamente');
+    });
   });
 
   it('Toggle Options', () => {
