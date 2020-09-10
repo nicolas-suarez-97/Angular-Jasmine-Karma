@@ -12,6 +12,7 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: Angular
+          aws-region: us-east-1
       - run: 
           name: Install
           command: npm install
