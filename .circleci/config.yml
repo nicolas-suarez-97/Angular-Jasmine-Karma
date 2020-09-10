@@ -13,6 +13,7 @@ jobs:
           command: npm test
 
 workflow:
+  build:
     - test
     - aws-s3/sync:
         arguments: |
@@ -29,4 +30,4 @@ workflow:
         from: bucket/build_asset.txt
         to: 's3://angular-cloudfront-test'
 
-            
+          
