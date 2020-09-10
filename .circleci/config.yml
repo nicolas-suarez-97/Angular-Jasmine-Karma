@@ -17,7 +17,7 @@ jobs:
           command: npm test
 
 workflow:
-  build:
+  build.deploy:
     jobs:
       - build
       - aws-s3/sync:
