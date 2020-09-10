@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  test:
+  run-task:
     docker:
       - image: circleci/node:latest-browsers
     steps:
@@ -13,9 +13,9 @@ jobs:
           command: npm test
 
 workflow:
-  test:
+  build-and-deploy:
     jobs:
-      - test
+      - run-task
       - aws-s3/sync:
           arguments: |
             --acl public-read \
