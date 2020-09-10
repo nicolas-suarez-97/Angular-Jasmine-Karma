@@ -1,6 +1,6 @@
 version: 2.1
 
-
+  
 jobs:
   build:
     docker:
@@ -13,7 +13,18 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+      - run:
+          name: Deploy
+          command: npm run aws-deploy
           
+orbs:
+  aws-cli: circleci/aws-cli@1.3
+
+workflows:
+  aws-cli:
+    jobs:
+      - build
+
 #       - aws-s3/sync:
 #           arguments: |
 #             --acl public-read \
@@ -35,4 +46,7 @@ jobs:
 #   build-deploy:
 #     jobs:
 #       - build
+
+# aws deploy create-application --application-name Angular-Jasmine
+# aws deploy push --application-name Angular-JK --s3-location s3://angular-cloudfront-test/Angular-Jasmine.zip --ignore-hidden-files
                
