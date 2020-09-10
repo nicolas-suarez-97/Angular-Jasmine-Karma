@@ -7,8 +7,11 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest-browsers
+    executor: aws-cli/default
     steps:
       - checkout
+      - aws-cli/setup:
+          profile-name: Angular
       - run: 
           name: Install
           command: npm install
