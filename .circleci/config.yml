@@ -14,4 +14,3 @@ jobs:
       - run:
           name: Run Tests
           command: ng test
-
